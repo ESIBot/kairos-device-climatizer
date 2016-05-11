@@ -1,0 +1,2 @@
+Las librerias deben ir en la carpeta donde se tenga instalado Arduino.
+Ejemplo: C:\Users\user\Documents\Arduino\libraries
