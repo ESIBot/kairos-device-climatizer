@@ -1,6 +1,5 @@
 #include "kairos_sun.hpp"
 
-#include <RTClib.h>
 #include <Wire.h>
 
 /**
