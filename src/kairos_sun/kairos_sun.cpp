@@ -1,7 +1,5 @@
 #include "kairos_sun.hpp"
 
-#include <Wire.h>
-
 /**
  * El constructor recibe el PIN donde se encuentra el relé, la hora de
  * inicio, los minutos de inicio y el intervalo en minutos que debe estar
@@ -19,9 +17,7 @@ KairosSun::KairosSun(const uint8_t relay, const int start_hour,
  * Configura un cliente NTP para obtener la hora
  * @param timeClient Cliente NTP
  */
-void KairosSun::SetNTPClient(NTPClient *timeClient) {
-  this->timeClient = timeClient;
-}
+void KairosSun::SetRTC(RTC_DS1307 rtc) { this->rtc = rtc; }
 
 /**
  * Debe llamarse periódicamente en la función loop para ir comprobando
@@ -29,10 +25,11 @@ void KairosSun::SetNTPClient(NTPClient *timeClient) {
  * apagado.
  */
 bool KairosSun::Update() {
+  DateTime now = this->rtc.now();
+
   bool on;
   int start_time = this->start_hour * 60 + this->start_minute;
-  int currentTime =
-      this->timeClient->getHours() * 60 + this->timeClient->getMinutes();
+  int currentTime = now.hour() * 60 + now.minute();
   int endTime = (start_time + this->interval) % (24 * 60);
   bool splited = (start_time + this->interval) / (24 * 60) > 1;
 
