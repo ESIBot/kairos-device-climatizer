@@ -20,7 +20,7 @@ const char *mqtt_password =
 const uint8_t RELAY = 5;
 const int START_HOUR = 8;
 const int START_MINUTE = 0;
-const int INTERVAL = 7 * 60;
+const int INTERVAL = 8 * 60;
 
 // Handle message received via MQTT
 void callback(char *topic, byte *payload, unsigned int length) {}

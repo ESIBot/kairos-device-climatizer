@@ -31,11 +31,11 @@ bool KairosSun::Update() {
   int start_time = this->start_hour * 60 + this->start_minute;
   int currentTime = now.hour() * 60 + now.minute();
   int endTime = (start_time + this->interval) % (24 * 60);
-  bool splited = (start_time + this->interval) / (24 * 60) > 1;
+  bool splited = ((start_time + this->interval) / (24.0 * 60.0)) > 1.0;
 
   // Enciendo si estamos entre la hora de encendido y de apagado
   if (!splited && (currentTime >= start_time && currentTime <= endTime) ||
-      splited && (currentTime >= start_time || currentTime <= endTime)) {
+      (splited && (currentTime >= start_time || currentTime <= endTime))) {
     digitalWrite(this->relay, LOW);
     on = true;
     Serial.printf("Encendido\n");
