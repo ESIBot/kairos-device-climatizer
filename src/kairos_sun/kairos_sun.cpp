@@ -34,9 +34,11 @@ bool KairosSun::Update() {
   int currentTime =
       this->timeClient->getHours() * 60 + this->timeClient->getMinutes();
   int endTime = (start_time + this->interval) % (24 * 60);
+  bool splited = (start_time + this->interval) / (24 * 60) > 1;
 
   // Enciendo si estamos entre la hora de encendido y de apagado
-  if (currentTime >= start_time && currentTime <= endTime) {
+  if (!splited && (currentTime >= start_time && currentTime <= endTime) ||
+      splited && (currentTime >= start_time || currentTime <= endTime)) {
     digitalWrite(this->relay, LOW);
     on = true;
     Serial.printf("Encendido\n");
