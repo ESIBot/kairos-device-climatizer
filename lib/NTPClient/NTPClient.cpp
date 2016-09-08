@@ -72,7 +72,6 @@ bool NTPClient::forceUpdate() {
     delay(10);
     cb = this->_udp->parsePacket();
     if (timeout > 100) {
-      Serial.println("TIMEOUT");
       return false; // timeout after 1000 ms
     }
     timeout++;
